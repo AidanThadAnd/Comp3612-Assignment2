@@ -7,6 +7,115 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1 class="bg-red-400">Type "npm run dev" in terminal to compline</h1>
+    <article id="home">
+        <header>
+            <p>
+                F1 Dashboard Project
+            </p>
+        </header>
+        <div id="intro">
+            <p>
+                Introduce the site
+            </p>
+            <form method="post" action="process.php">
+                <label>Season</label>
+                <select id="season">
+                    <option>Select a season</option>
+                    //list seasons here
+                </select>
+                <input type="submit" />
+            </form>
+        </div>
+        <div>
+            <img src="someimage.jpg" />
+        </div>
+    </article>
+    <article id="browse" class="hidden">
+        <header>
+            <h1>F1 Dashboard Project</h1>
+            <button id="Home">Home</button>
+            <button id="Favorites">Favorites</button>
+        </header>
+        <section id="races">
+            <h1>
+                2023 Races
+            </h1>
+            <div>
+                <ul>
+                    <li>Rnd</li>
+                    <li>Name</li>
+                </ul>
+                <ul>
+                    <li>1</li>
+                    <li>British Grand Prix</li>
+                    <li>
+                        <button id="results">Results</button>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <section id="race results">
+            <h1>Results for 2023 Italian Grand Prix</h1>
+            <h2>Name, Round #, Year, Circuit Name, Date, URL</h2>
+            <div id="qualifying">
+                <h3>Qualifying</h3>
+                <ul id="banner">
+                    <li>Pos</li>
+                    <li>Name</li>
+                    <li>Const</li>
+                    <li>Q1</li>
+                    <li>Q2</li>
+                    <li>Q3</li>
+                </ul>
+                <ul id="racer">
+                    <li>Max Verstappen</li>
+                    <li>Red Bull</li>
+                    <li>1:27:23</li>
+                    <li>1:23:23</li>
+                    <li>1:23:13</li>
+                </ul>
+            </div>
+            <div id="results">
+                <h3>Results</h3>
+                <div id="podium">
+                    <div id="first">
+                        <h4>Max Verstappen</h4>
+                        <img src="max_verstappen.jpg" />
+                    </div>
+                    <div id="second">
+                        <h4>Charles Leblanc</h4>
+                        <img src="charles_leblanc.jpg" />
+                    </div>
+                    <div id="third">
+                        <h4>Lewis Hamilton</h4>
+                        <img src="lewis_hamilton.jpg" />
+                    </div>
+                </div>
+                <ul id="banner">
+                    <li>Pos</li>
+                    <li>Name</li>
+                    <li>Const</li>
+                    <li>Laps</li>
+                    <li>Pts</li>
+                </ul>
+                <ul id="racer">
+                    <li>1</li>
+                    <li>Max Verstappen</li>
+                    <li>Red Bull</li>
+                    <li>46</li>
+                    <li>25</li>
+                </ul>
+            </div>
+        </section>
+    </article>
+    <aside id="circuit">
+
+    </aside>
+    <aside id="driver">
+
+    </aside>
+    <aside id="constructor">
+        
+    </aside>
 </body>
 </html>
