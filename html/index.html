@@ -67,7 +67,9 @@
                     <li>Rnd</li>
                     <li>Name</li>
                 </ul>
+                <!--Probably have to have a ul nested inside a ul for this-->
                 <ul>
+                    <!--this will be populated by js function-->
                     <li>1</li>
                     <li>British Grand Prix</li>
                     <li>
@@ -89,7 +91,49 @@
                     <li>Q2</li>
                     <li>Q3</li>
                 </ul>
-                <ul id="racer">
+                <!--Probably have to have a ul nested inside a ul for this-->
+                <ul id="racer pos">
+                    <!--this will be populated by js function-->
+                    <li>Max Verstappen</li>
+                    <li>Red Bull</li>
+                    <li>1:27:23</li>
+                    <li>1:23:23</li>
+                    <li>1:23:13</li>
+                </ul>
+                <ul id="racer name" class="hidden">
+                    <!--this will be populated by js function-->
+                    <li>Max Verstappen</li>
+                    <li>Red Bull</li>
+                    <li>1:27:23</li>
+                    <li>1:23:23</li>
+                    <li>1:23:13</li>
+                </ul>
+                <ul id="racer const" class="hidden">
+                    <!--this will be populated by js function-->
+                    <li>Max Verstappen</li>
+                    <li>Red Bull</li>
+                    <li>1:27:23</li>
+                    <li>1:23:23</li>
+                    <li>1:23:13</li>
+                </ul>
+                <ul id="racer q1" class="hidden">
+                    <!--this will be populated by js function-->
+                    <li>Max Verstappen</li>
+                    <li>Red Bull</li>
+                    <li>1:27:23</li>
+                    <li>1:23:23</li>
+                    <li>1:23:13</li>
+                </ul>
+                <ul id="racer q2" class="hidden">
+                    <!--this will be populated by js function-->
+                    <li>Max Verstappen</li>
+                    <li>Red Bull</li>
+                    <li>1:27:23</li>
+                    <li>1:23:23</li>
+                    <li>1:23:13</li>
+                </ul>
+                <ul id="racer q3" class="hidden">
+                    <!--this will be populated by js function-->
                     <li>Max Verstappen</li>
                     <li>Red Bull</li>
                     <li>1:27:23</li>
@@ -100,7 +144,9 @@
             <div id="results">
                 <h3>Results</h3>
                 <div id="podium">
+                    <!--this will be populated by js function-->
                     <div id="first">
+                        <!--Just a template, haven't found images-->
                         <h4>Max Verstappen</h4>
                         <img src="max_verstappen.jpg" />
                     </div>
@@ -120,7 +166,41 @@
                     <li>Laps</li>
                     <li>Pts</li>
                 </ul>
-                <ul id="racer">
+                <!--Probably have to have a ul nested inside a ul for this-->
+                <ul id="racer pos">
+                    <!--this will be populated by js function-->
+                    <li>1</li>
+                    <li>Max Verstappen</li>
+                    <li>Red Bull</li>
+                    <li>46</li>
+                    <li>25</li>
+                </ul>
+                <ul id="racer name" class="hidden">
+                    <!--this will be populated by js function-->
+                    <li>1</li>
+                    <li>Max Verstappen</li>
+                    <li>Red Bull</li>
+                    <li>46</li>
+                    <li>25</li>
+                </ul>
+                <ul id="racer const" class="hidden">
+                    <!--this will be populated by js function-->
+                    <li>1</li>
+                    <li>Max Verstappen</li>
+                    <li>Red Bull</li>
+                    <li>46</li>
+                    <li>25</li>
+                </ul>
+                <ul id="racer laps" class="hidden">
+                    <!--this will be populated by js function-->
+                    <li>1</li>
+                    <li>Max Verstappen</li>
+                    <li>Red Bull</li>
+                    <li>46</li>
+                    <li>25</li>
+                </ul>
+                <ul id="racer pts" class="hidden">
+                    <!--this will be populated by js function-->
                     <li>1</li>
                     <li>Max Verstappen</li>
                     <li>Red Bull</li>
@@ -131,12 +211,51 @@
         </section>
     </article>
     <aside id="circuit">
-
+        <header>
+            <h1>Circuit Details</h1>
+            <button id="circuit x close"></button>
+        </header>
+        <div>
+            <img src="sample_circuit.svg" />
+        </div>
+        <div>
+            <p>
+                <ul>
+                    <!--this will be populated by js function-->
+                    <li>Name</li>
+                    <li>Location</li>
+                    <li>Country</li>
+                    <li>URL</li>
+                </ul>
+                <button id="add favorites"></button>
+            </p>
+            <button id="circuit close"></button>
+        </div>
     </aside>
     <aside id="driver">
 
     </aside>
     <aside id="constructor">
+        <button id="circuit x close"></button>
+        <div id="info">
+            <h1>Constructor Details</h1>
+            <ul>
+                <li>name</li>
+                <li>Nationality</li>
+                <li>URL</li>
+            </ul>
+            <button id="add favorites"></button>
+        </div>
+        <div id="race results">
+            <h1>Race Results</h1>
+            <ul id="banner">
+                <li>Rnd</li>
+                <li>Name</li>
+                <li>Driver</li>
+                <li>Pos</li>
+            </ul>
+            <!--Gotta go to work, finishing html and then starting js coding monday-->
+        </div>
         
     </aside>
 </body>
