@@ -582,8 +582,12 @@ video {
   margin-right: 1.75rem;
 }
 
-.ml-3 {
-  margin-left: 0.75rem;
+.mr-6 {
+  margin-right: 1.5rem;
+}
+
+.mr-3 {
+  margin-right: 0.75rem;
 }
 
 .block {
@@ -641,20 +645,6 @@ video {
 
 .flex-grow {
   flex-grow: 1;
-}
-
-@keyframes slide-up {
-  from {
-    transform: translateY(100%);
-  }
-
-  to {
-    transform: translateY(0);
-  }
-}
-
-.animate-slide-up {
-  animation: slide-up 1s ease-in-out;
 }
 
 .items-start {
@@ -761,16 +751,8 @@ video {
   padding-bottom: 0.5rem;
 }
 
-.pl-8 {
-  padding-left: 2rem;
-}
-
-.pl-16 {
-  padding-left: 4rem;
-}
-
-.pl-24 {
-  padding-left: 6rem;
+.pr-6 {
+  padding-right: 1.5rem;
 }
 
 .text-left {
