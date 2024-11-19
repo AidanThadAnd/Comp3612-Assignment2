@@ -9,10 +9,10 @@
     <script src="../js/data.js"></script>
 </head>
 
-<body class="bg-gray-100">
-    <header class="bg-white shadow-lg rounded-lg w-full flex items-center justify-between">
-        <img class="size-24" src="../src/images/f1logo.svg" alt="F1 Logo">
-        <h1 class="text-center text-3xl flex-grow">
+<body class="bg-black ">
+    <header id="homeNavbar" class="bg-custom-gray-primary shadow-lg rounded-t-none rounded-lg w-full flex items-center justify-between">
+        <img class="size-20 ml-6 " src="../src/images/f1logo-cropped.svg" alt="F1 Logo">
+        <h1 class="text-center pl-44 text-3xl flex-grow text-white">
             F1 Dashboard Project
         </h1>
         <!--https://v1.tailwindcss.com/components/buttons-->
@@ -23,26 +23,27 @@
             Favorites
         </button>
     </header>
-    <article id="home" class="hidden">
 
-        
+    <article id="home" class="">
+
         <div class="" id="intro">
-            <div class="bg-white shadow-lg rounded-lg my-14 mx-8 h-auto p-4">
+            <div class="bg-custom-gray-primary text-white shadow-lg rounded-lg my-4 mx-8 h-auto p-4">
                 <p class="font-bold text-center">
                     Welcome to the premiere F1 dashboard for all super fans around the world. Below you will see a selector for various seasons, be sure to checkout how your favorite teams have done their previous seasons!
                 </p>
-                <p class="text-center">This website was made by: Dan and Aidan and was built with: HTML, Tailwind CSS and Javascript 
+                <p class="text-center hidden">This website was made by: Dan and Aidan and was built with: HTML, Tailwind CSS and Javascript 
                     <br>
                         <a href="https://github.com/AidanThadAnd/Comp3612-Assignment2">Our Github!</a>
                 </p>
                 
+            </div>
         </div>
         
         
-        <div class="flex items-start space-x-32">
+        <div class="flex items-start justify-center">
             
             <!--Button taken from https://www.creative-tim.com/twcomponents/component/select-input-field-->
-            <div class="bg-white shadow-lg rounded-lg max-w-96 h-16 p-4 ml-7 inline-block items-start">
+            <div class="bg-custom-gray-primary shadow-lg rounded-lg p-4 ml-7 inline-block items-start justify-center w-2/4">
                 <div class="max-w-2xl mx-auto">
                     <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option selected>Choose a season</option>
@@ -53,18 +54,16 @@
                 </select>
                 </div>
             </div>
-
-        
-            <div class="inline-block pl-24g">
-                <img src="../src/images/f1Car.svg" class=" h-auto w-[900px]" />
-            </div>
+            
         </div>
-        
-        
+          
         
     </article>
-    <article id="browse" class="w-full">
-  
+    <img id="f1CarBackground" src="../src/images/f1Car.jpg" class="w-full h-full p-0 m-0">
+
+    
+
+    <article id="browse" class="w-full hidden">
         </header>
             <div class="flex space-x-4 p-4">
                 <section id="races" class="w-[300px] bg-white shadow-lg rounded-lg  p-4 mx-8">
