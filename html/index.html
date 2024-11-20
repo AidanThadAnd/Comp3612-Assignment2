@@ -9,7 +9,7 @@
     <script src="../js/data.js"></script>
 </head>
 
-<body class="bg-black ">
+<body class="">
     <header id="homeNavbar" class="bg-custom-gray-primary shadow-lg rounded-t-none rounded-lg w-full flex items-center justify-between">
         <img class="size-20 ml-6 " src="../src/images/f1logo-cropped.svg" alt="F1 Logo">
         <h1 class="text-center pl-44 text-3xl flex-grow text-white">
@@ -24,7 +24,7 @@
         </button>
     </header>
 
-    <article id="home" class="">
+    <article id="home" class="hidden">
 
         <div class="" id="intro">
             <div class="bg-custom-gray-primary text-white shadow-lg rounded-lg my-4 mx-8 h-auto p-4">
@@ -59,14 +59,14 @@
           
         
     </article>
-    <img id="f1CarBackground" src="../src/images/f1Car.jpg" class="w-full h-full p-0 m-0">
-
+    <!--<img id="f1CarBackground" src="../src/images/f1Car.jpg" class="w-full h-full p-0 m-0">-->
+    <!--testing how this looks-->
     
 
-    <article id="browse" class="w-full hidden">
+    <article id="browse" class="h-full w-full bg-[url('../src/images/f1Car.jpg')] bg-center">
         </header>
             <div class="flex space-x-4 p-4">
-                <section id="races" class="w-[300px] bg-white shadow-lg rounded-lg  p-4 mx-8">
+                <section id="races" class="w-[300px] bg-blue-500 shadow-lg rounded-lg  p-4 mx-8">
                     <h1 class="font-bold text-center text-3xl p-4">
                         2023 Races
                     </h1>
@@ -76,7 +76,7 @@
                             <li class="px-4">Name</li>
                         </ul>
                         <!--Probably have to have a ul nested inside a ul for this-->
-                        <ul class="flex items-stretch text-left px-2 border-2">
+                        <ul class="flex items-stretch text-left px-2 border-2 border-black">
                             <!--this will be populated by js function-->
                             <li class="px-4">1</li>
                             <li class="px-4">British Grand Prix</li>
@@ -84,7 +84,7 @@
                         </ul>
                     </div>
                 </section>
-                <section id="race-results" class="w-[1100px] mx-10 bg-white shadow-lg rounded-lg p-4 space-x-4">
+                <section id="race-results" class="w-[1100px] mx-10 bg-blue-500 shadow-lg rounded-lg p-4 space-x-4">
                     <h1 class="font-bold text-center text-3xl p-4">Results for 2023 Italian Grand Prix</h1>
                     <h2 class="font-bold text-center text-xl p-4">Name, Round #, Year, Circuit Name, Date, URL</h2>
                     <div class="flex items-stretch">
@@ -99,7 +99,7 @@
                                 <li class="px-4">Q3</li>
                             </ul>
                             <!--Probably have to have a ul nested inside a ul for this-->
-                            <ul id="racer-pos" class="flex space-x-4 text-left px-2 border-2">
+                            <ul id="racer-pos" class="flex space-x-4 text-left px-2 border-2 border-black">
                                 <!--this will be populated by js function-->
                                 <li class="px-4">1</li>
                                 <li class="px-2">Max Verstappen</li>
@@ -181,7 +181,7 @@
                                 <li class="px-2">Pts</li>
                             </ul>
                             <!--Probably have to have a ul nested inside a ul for this-->
-                            <ul id="racer-pos" class="flex space-x-4 text-left px-2 border-2">
+                            <ul id="racer-pos" class="flex space-x-4 text-left px-2 border-2 border-black">
                                 <!--this will be populated by js function-->
                                 <li class="px-4">1</li>
                                 <li class="px-2">Max Verstappen</li>
@@ -226,53 +226,107 @@
                 </section>
             </div>
     </article>
-    <aside id="circuit" class="hidden">
-        <header>
-            <h1>Circuit Details</h1>
-            <button id="circuit x close"></button>
-        </header>
-        <div>
-            <img src="sample_circuit.svg" />
+
+    <!--https://www.youtube.com/watch?v=7KmXhRJuEi8-->
+    <dialog open id="circuit" class="fixed left-0 top-0 bg-black bg-opacity-50 h-full w-full flex justify-center items-center">
+        <div id="modal" class="w-[70%] h-[70%] bg-white p-12 rounded-lg shadow-lg">
+            <header class="flex justify-between px-8">
+                <h1 class="pl-[370px] text-center text-3xl">Circuit Details</h1>
+                <button id="circuit-x-close">Close</button>
+            </header>
+            <section class="flex">
+                <div class="w-1/2 p-4">
+                    <img src="sample_circuit.svg" />
+                </div>
+                <div class="w-1/2 p-4">
+                    <p>
+                        <ul>
+                            <!--this will be populated by js function-->
+                            <li>Name</li>
+                            <li>Location</li>
+                            <li>Country</li>
+                            <li>URL</li>
+                        </ul>
+                        <button id="add favorites"></button>
+                    </p>
+                </div>
+            </section>
+            <button id="circuit-close">Close</button>
         </div>
-        <div>
-            <p>
+    </dialog>
+
+    <dialog id="driver" class="fixed hidden left-0 top-0 bg-black bg-opacity-50 h-full w-full flex justify-center items-center">
+        <div id="modal" class="w-[70%] h-[70%] bg-white p-12 rounded-lg shadow-lg">
+            <button id="driver-x-close"></button>
+            <section class="flex">
+                <div id="info" class="w-1/3">
+                    <h1>Driver Details</h1>
+                    <ul>
+                        <li>Name</li>
+                        <li>Dob</li>
+                        <li>age</li>
+                        <li>nationality</li>
+                        <li>url</li>
+                    </ul>
+                    <img src="driver-img.jpg" />
+                </div>
+                <div id="race-results" class="w-2/3">
+                    <h2>Race Results</h2>
+                    <ul id="banner">
+                        <li>Rnd</li>
+                        <li>Name</li>
+                        <li>Pos</li>
+                        <li>Points</li>
+                    </ul>
+                    <div id="racers">
+                        <ul>
+                            <li>1</li>
+                            <li>Britsh Grand Prix</li>
+                            <li>1</li>
+                            <li>10</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <button id="driver-close">Close</button>
+        </div>
+    </dialog>
+    
+    <dialog id="constructor" class="fixed hidden left-0 top-0 bg-black bg-opacity-50 h-full w-full flex justify-center items-center">
+        <div id="modal" class="w-[70%] h-[70%] bg-white p-12 rounded-lg shadow-lg">
+            <button id="circuit-x-close"></button>
+            <div id="info">
+                <h1>Constructor Details</h1>
                 <ul>
-                    <!--this will be populated by js function-->
-                    <li>Name</li>
-                    <li>Location</li>
-                    <li>Country</li>
+                    <li>name</li>
+                    <li>Nationality</li>
                     <li>URL</li>
                 </ul>
                 <button id="add favorites"></button>
-            </p>
-            <button id="circuit close"></button>
+            </div>
+            <div id="race-results">
+                <h1>Race Results</h1>
+                <ul id="banner">
+                    <li>Rnd</li>
+                    <li>Name</li>
+                    <li>Driver</li>
+                    <li>Pos</li>
+                </ul>
+                <div id="racers">
+                    <ul>
+                        <li>1</li>
+                        <li>British Grand Prix</li>
+                        <li>1</li>
+                        <li>15</li>
+                    </ul>
+                </div>
+            </div>
+            <button id="constructor-close">Close</button>
         </div>
-    </aside>
-    <aside id="driver">
+    </dialog>
 
-    </aside>
-    <aside id="constructor" class="hidden">
-        <button id="circuit x close"></button>
-        <div id="info">
-            <h1>Constructor Details</h1>
-            <ul>
-                <li>name</li>
-                <li>Nationality</li>
-                <li>URL</li>
-            </ul>
-            <button id="add favorites"></button>
-        </div>
-        <div id="race results">
-            <h1>Race Results</h1>
-            <ul id="banner">
-                <li>Rnd</li>
-                <li>Name</li>
-                <li>Driver</li>
-                <li>Pos</li>
-            </ul>
-            <!--Gotta go to work, finishing html and then starting js coding monday-->
-        </div>
-        
-    </aside>
+    <dialog id="favorites" class="hidden">
+
+    </dialog>
 </body>
 </html>
