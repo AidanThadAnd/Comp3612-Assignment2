@@ -164,6 +164,7 @@ function singleRaceResult(raceID){
 }
 
 //Results for all races specified by season
+//Is this supposed to be allResultsForSeason? **
 function allRacesForSeason(season){
     const URL = DOMAIN + `results.php?season=${season}`
 
