@@ -1,6 +1,58 @@
 // JavaScript to dynamically calculate the remaining height for the f1 car background image
 //ChatGPT was used to get a skeleton of this function
-window.addEventListener('DOMContentLoaded', function() {
+
+document.addEventListener('DOMContentLoaded', () => {
+    const DOMAIN = "https://www.randyconnolly.com/funwebdev/3rd/api/f1/";
+    //loading years
+    const countrySelect = document.querySelector('#countriesSelector');
+    //Populates the selection box with data all the way back to 1950 (last day of data)
+    for(let i=2024; i>=1950; i--){
+        const optionElement = document.createElement('option');
+        optionElement.dataset.year = i;
+        optionElement.textContent = `${i}`;
+        countrySelect.appendChild(optionElement);
+    }
+
+    //Listener for selecting a season
+    //Chat helped me with this, might want to research 'change' event so that we can use it
+    countrySelect.addEventListener('change', e =>{
+        //Getting year from dataset
+        const selectedOption = e.target.selectedOptions[0];
+        const year = selectedOption.dataset.year;
+        //Establishing URL
+        const URL = DOMAIN + `races.php?season=${year}`;
+
+        //Fetching race data then populating
+        fetch(URL)
+	        .then(response=>response.json()) 
+	        //function to be called when promise is resolved
+
+	        .then(data=>{
+                //hidden and revealing pages
+                console.log(data);
+                document.querySelector('#home').classList.toggle('hidden');
+                document.querySelector('#browse').classList.toggle('hidden');
+                document.querySelector('#races').classList.toggle('hidden');
+                //successfully populates the table
+                populateRaces(data);
+            });
+        
+    })
+
+    //Home button
+    document.querySelector('#homeButton').addEventListener('click', e => {
+        //removing and adding in case already on home page
+        document.querySelector('#home').classList.remove('hidden');
+        document.querySelector('#browse').classList.add('hidden');
+        document.querySelector('#races').classList.add('hidden');
+    })
+
+});
+
+
+
+//This is giving an error so i'm just commenting it out for now, trying to get started with the events
+/*window.addEventListener('DOMContentLoaded', function() {
     const homeContentLength = document.querySelector('#home');
     const headerContentLength = document.querySelector('#homeNavbar')
     const image = document.querySelector('#f1CarBackground');
@@ -14,10 +66,13 @@ window.addEventListener('DOMContentLoaded', function() {
     
     // Set the image height to the remaining height
     image.style.height = `${remainingHeight}px`;
-});
+
+    
+    }
+});*/
 
 //Recalculate on based on a window resize
-window.addEventListener('resize', function() {
+/*window.addEventListener('resize', function() {
     const homeContentLength = document.querySelector('#home');
     const headerContentLength = document.querySelector('#homeNavbar')
     const image = document.querySelector('#f1CarBackground');
@@ -31,7 +86,7 @@ window.addEventListener('resize', function() {
     
     // Set the image height to the remaining height
     image.style.height = `${remainingHeight}px`;
-});
+});*/
 
 //Populates the races tables with data
 function populateRaces(data){
@@ -52,8 +107,9 @@ function populateRaces(data){
         tdName.textContent = d.name;
         trElement.appendChild(tdName)
 
-        const tdResults = document.createElement('tr');
-        tdResults.className = 'border border-black px-2 py-1 text-red-60';
+        const tdResults = document.createElement('td');
+        tdResults.className = 'border border-black px-2 py-1 text-red-600';
+        tdResults.dataset.id = d.id;
         tdResults.textContent = 'Results';
         trElement.appendChild(tdResults);
 
