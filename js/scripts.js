@@ -1,6 +1,7 @@
 // JavaScript to dynamically calculate the remaining height for the f1 car background image
 //ChatGPT was used to get a skeleton of this function
-
+//The window functions for the front page are below commented out, was getting an error for some reason
+//Next to do is populate qualifying and results and open that side of the browse page
 document.addEventListener('DOMContentLoaded', () => {
     const DOMAIN = "https://www.randyconnolly.com/funwebdev/3rd/api/f1/";
     //loading years
@@ -90,6 +91,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 //Populates the races tables with data
 function populateRaces(data){
+    //Clear HTML for new data
+    document.querySelector('#racesTableBody').innerHTML = '';
     data.forEach(d => {
 
         //Create row element
