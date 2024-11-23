@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
         //Getting year from dataset
         const selectedOption = e.target.selectedOptions[0];
         const year = selectedOption.dataset.year;
+        usedYear = year;
         //Establishing URL
         const URL = DOMAIN + `races.php?season=${year}`;
 
@@ -27,25 +28,26 @@ document.addEventListener('DOMContentLoaded', () => {
         fetch(URL)
 	        .then(response=>response.json()) 
 	        //function to be called when promise is resolved
-
 	        .then(data=>{
                 //hidden and revealing pages
-                console.log(data);
                 document.querySelector('#home').classList.toggle('hidden');
                 document.querySelector('#browse').classList.toggle('hidden');
                 document.querySelector('#races').classList.toggle('hidden');
                 //successfully populates the table
                 populateRaces(data);
+                localStorage.setItem('raceData'.data);
+                
             });
-        
-    })
+    });
+    //sorry drunk can't continue, have an idea of how to do all this but lets see what you got 
+    document.querySelector('#racesTableBody', e => {
+        const id = e.target.dataset.id;
+        fetch(DOMAIN +)
 
-    //Home button
-    document.querySelector('#homeButton').addEventListener('click', e => {
-        //removing and adding in case already on home page
-        document.querySelector('#home').classList.remove('hidden');
-        document.querySelector('#browse').classList.add('hidden');
-        document.querySelector('#races').classList.add('hidden');
+    });
+
+
+   
     })
 
 });
