@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="../js/scripts.js"></script>
-    <script src="../js/data.js"></script>
+    <script type="module" src="../js/data.js"></script>
+    <script type="module" src="../js/scripts.js"></script>
 </head>
 
-<body class="">
+<body class="bg-black">
     <header id="homeNavbar" class="bg-custom-gray-primary shadow-lg rounded-t-none rounded-lg w-full flex items-center justify-between">
         <img class="size-20 ml-6 " src="../src/images/f1logo-cropped.svg" alt="F1 Logo">
         <h1 class="text-center pl-44 text-3xl flex-grow text-white">
@@ -24,7 +24,7 @@
         </button>
     </header>
 
-    <article id="home" class="">
+    <article id="home">
 
         <div class="" id="intro">
             <div class="bg-custom-gray-primary text-white shadow-lg rounded-lg my-4 mx-8 h-auto p-4">
@@ -55,13 +55,14 @@
           
         
     </article>
-    <!--<img id="f1CarBackground" src="../src/images/f1Car.jpg" class="w-full h-full p-0 m-0">-->
-    <!--testing how this looks-->
     
+    <img id="f1CarBackground" src="../src/images/f1Car.jpg" class="w-full h-full p-0 m-0">
 
-    <article id="browse" class="h-full hidden w-full bg-[url('../src/images/f1Car.jpg')] bg-center">
-        </header>
 
+    <!-- Attempting to add somesort of nice gradient as a background, currently struggling with making sure it extends to the very bottom of the screen
+     For some reason it needs a weird style height, I will fix this soon-->
+    <article id="browse" class="h-full hidden w-full" style="min-height:100vh; background-image: linear-gradient(to top, #1f2937, #1f1f2a, #1b161d, #120d10, #000000); overflow: auto;">
+        
             <div class="flex space-x-4 p-4">
 
                 <section id="races" class="w-[350px] h-[585px] hidden bg-blue-500 shadow-lg rounded-lg  p-4">
@@ -369,5 +370,6 @@
             </div>
 
     </dialog>
+    
 </body>
 </html>
