@@ -22,10 +22,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const year = selectedOption.dataset.year;
         usedYear = year;
         //Establishing URL
-        const URL = DOMAIN + `races.php?season=${year}`;
+        const racesURL = DOMAIN + `races.php?season=${year}`;
 
         //Fetching race data then populating
-        fetch(URL)
+        fetch(racesURL)
 	        .then(response=>response.json()) 
 	        //function to be called when promise is resolved
 	        .then(data=>{
@@ -35,19 +35,33 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.querySelector('#races').classList.toggle('hidden');
                 //successfully populates the table
                 populateRaces(data);
-                localStorage.setItem('raceData'.data);
+                localStorage.setItem('raceData', data);
                 
             });
     });
-    //sorry drunk can't continue, have an idea of how to do all this but lets see what you got 
-    document.querySelector('#racesTableBody', e => {
-        const id = e.target.dataset.id;
-        fetch(DOMAIN +)
+    //not testing just writing some stuff, think it works. We can now pull off of localStorage
+    const racesSelect = document.querySelector('#races');
+    racesSelect.addEventListener('click', e => {
+        document.querySelector('#race-results').classList.toggle('hidden');
+        const raceID = e.target.dataset.id;
+        qualifyingURL = DOMAIN + `qualifying.php?race=${raceID}`
+        fetch(qualifyingURL)
+            .then(response=>response.json())
 
-    });
+            .then(data=>{
+                localStorage.setItem('qualifyingData', data);
+                populateQualifying(data);
+            })
+        resultsURL = DOMAIN + `results.php?race=${raceID}`;
+        fetch(resultsURL)
+            .then(response=>response.json())
+            
+            .then(data=> {
+                localStorage.setItem('resultsData', data);
+                populateResults(data);
+            })
 
 
-   
     })
 
 });
@@ -126,6 +140,7 @@ function populateRaces(data){
 
 //Populates the qualifying table, sort data before using
 function populateQualifying(data){
+    document.querySelector('#qualifyingTableBody').innerHTML = '';
     //Loop through all data
     data.forEach(d => {
 
@@ -141,7 +156,7 @@ function populateQualifying(data){
         
         const tdName = document.createElement('td');
         tdName.className = 'border border-black px-2 py-1';
-        tdName.textContent = d.driver.forename + d.driver.surname;
+        tdName.textContent = `${d.driver.forename} ${d.driver.surname}`;
         //Attach ID to ease with event handling
         tdName.dataset.id = d.driver.id;
         trElement.appendChild(tdName);
@@ -168,15 +183,16 @@ function populateQualifying(data){
         trElement.appendChild(tdQ3);
 
         //Add to the table body 
-        document.querySelector('qualifyingTableBody').appendChild(trElement);
+        document.querySelector('#qualifyingTableBody').appendChild(trElement);
 
     })
 }
 
 //Populates the results table, sort before using
 function populateResults(data){
+    document.querySelector('#resultsTableBody').innerHTML = '';
     //Loop through all data
-    forEach(d =>{
+    data.forEach(d =>{
 
         //Create row element
         const trElement = document.createElement('tr');
@@ -190,7 +206,7 @@ function populateResults(data){
 
         const tdName = document.createElement('td');
         tdName.className = 'border border-black px-2 py-1';
-        tdName.textContent = d.driver.forename + d.driver.surname;
+        tdName.textContent = `${d.driver.forename} ${d.driver.surname}`;
         //Attach ID to ease with event handling
         tdName.dataset.id = d.driver.id;
         trElement.appendChild(tdName);
@@ -212,7 +228,7 @@ function populateResults(data){
         trElement.appendChild(tdPts);
 
         //Add to the table body 
-        document.querySelector('resultsTableBody').appendChild(trElement);
+        document.querySelector('#resultsTableBody').appendChild(trElement);
 
     })
 }
