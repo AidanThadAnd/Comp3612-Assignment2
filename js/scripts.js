@@ -1,7 +1,9 @@
-// JavaScript to dynamically calculate the remaining height for the f1 car background image
+// JavaScript to dynamically calculate the remaining height for the f1 car background background
 //ChatGPT was used to get a skeleton of this function
 //The window functions for the front page are below commented out, was getting an error for some reason
 //Next to do is populate qualifying and results and open that side of the browse page
+
+
 document.addEventListener('DOMContentLoaded', () => {
     const DOMAIN = "https://www.randyconnolly.com/funwebdev/3rd/api/f1/";
     //loading years
@@ -21,23 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const selectedOption = e.target.selectedOptions[0];
         const year = selectedOption.dataset.year;
         //Establishing URL
-        const URL = DOMAIN + `races.php?season=${year}`;
-
-        //Fetching race data then populating
-        fetch(URL)
-	        .then(response=>response.json()) 
-	        //function to be called when promise is resolved
-
-	        .then(data=>{
-                //hidden and revealing pages
-                console.log(data);
-                document.querySelector('#home').classList.toggle('hidden');
-                document.querySelector('#browse').classList.toggle('hidden');
-                document.querySelector('#races').classList.toggle('hidden');
-                //successfully populates the table
-                populateRaces(data);
-            });
-        
+        allRacesForSeason(year);
     })
 
     //Home button
@@ -46,48 +32,38 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('#home').classList.remove('hidden');
         document.querySelector('#browse').classList.add('hidden');
         document.querySelector('#races').classList.add('hidden');
+        document.querySelector('#f1CarBackground').classList.toggle('hidden');
     })
 
 });
 
 
 
-//This is giving an error so i'm just commenting it out for now, trying to get started with the events
-/*window.addEventListener('DOMContentLoaded', function() {
-    const homeContentLength = document.querySelector('#home');
-    const headerContentLength = document.querySelector('#homeNavbar')
-    const image = document.querySelector('#f1CarBackground');
-    const unacountedPaddingHomeAndNavbar = 16;
-    
-    // Get the height of the content above the image
-    const contentHeight = homeContentLength.offsetHeight + headerContentLength.offsetHeight+unacountedPaddingHomeAndNavbar;
-    
-    
-    const remainingHeight = window.innerHeight - contentHeight;
-    
-    // Set the image height to the remaining height
-    image.style.height = `${remainingHeight}px`;
 
-    
-    }
-});*/
+//This is giving an error so i'm just commenting it out for now, trying to get started with the events
+//Should be fixed, recomment out if it contiues to break your code
 
 //Recalculate on based on a window resize
-/*window.addEventListener('resize', function() {
-    const homeContentLength = document.querySelector('#home');
-    const headerContentLength = document.querySelector('#homeNavbar')
-    const image = document.querySelector('#f1CarBackground');
-    const unacountedPaddingHomeAndNavbar = 16;
-    
-   
-    const contentHeight = homeContentLength.offsetHeight + headerContentLength.offsetHeight+unacountedPaddingHomeAndNavbar;
-    
-    // Calculate the remaining height (viewport height minus content height)
+function adjustBackgroundHeight() {
+    const background = document.querySelector('#f1CarBackground');
+    let contentHeight = 16;
+
+    // Get all elements before the background in the DOM tree
+    let sibling = background.previousElementSibling;
+    while (sibling) {
+        contentHeight += sibling.offsetHeight;
+        sibling = sibling.previousElementSibling;
+    }
+
     const remainingHeight = window.innerHeight - contentHeight;
-    
-    // Set the image height to the remaining height
-    image.style.height = `${remainingHeight}px`;
-});*/
+
+    // Set the background height to the remaining height
+    background.style.height = `${remainingHeight}px`;
+}
+
+window.addEventListener('resize', adjustBackgroundHeight);
+document.addEventListener('DOMContentLoaded', adjustBackgroundHeight);
+
 
 //Populates the races tables with data
 function populateRaces(data){
@@ -213,4 +189,211 @@ function populateResults(data){
         document.querySelector('resultsTableBody').appendChild(trElement);
 
     })
+}
+
+
+
+
+//I put all of data.js here as I currently don't wanna figure out how to import the functions from there
+/*
+This is the JS that will be used to pull all available data from the various API endpoints
+Preferablly all data retrieval will be done here so that the other file is much more cleaner/high level
+
+The functions are seperated into the following categories in-order:
+- Circuits
+- Constructors
+- Drivers
+- Race Results
+- Races
+- Results
+- Qualifying
+
+This above follows the layout of the API spec page, except for constructorResults, which I placed in the race result category
+
+TODO: 
+- Add data parsing along with return statements to return properly formated data
+- Add localStorage functionality to qualifyingResultsForSeason and allRacesForSeason
+- Rename functions to something more standardized
+*/
+
+
+const DOMAIN = "https://www.randyconnolly.com/funwebdev/3rd/api/f1/"
+
+//  CIRCUITS
+//All Circuits
+
+
+//Single Circuit specified by circuitID
+ function singleCircuit(circuitID){
+    const URL = DOMAIN + `circuits.php?id=${circuitID}`
+
+    fetch(URL)
+	.then(response=>response.json()) 
+	// function to be called when promise is resolved
+
+	.then(data=>{});
+}
+
+
+
+//  CONSTRUCTORS
+//All Constructors
+ function allConstructors(){
+    const URL = DOMAIN + "constructors.php"
+
+    fetch(URL)
+	.then(response=>response.json()) 
+	// function to be called when promise is resolved
+
+	.then(data=>{});
+}
+
+//Single constructor specified by constructorID or constructorRef
+ function singleConstructor(specifier){
+    const URL = specifier.isInteger() //Setting domain based on either ID(integer) or REF(not integer)
+    ? DOMAIN + `constructors.php?id=${specifier}` 
+    : DOMAIN + `constructors.php?ref=${specifier}`;
+
+    fetch(URL)
+	.then(response=>response.json()) 
+	// function to be called when promise is resolved
+
+	.then(data=>{});
+}
+
+
+
+//  DRIVERS
+//All drivers
+ function allDrivers(){
+    const URL = DOMAIN + "drivers.php"
+
+    fetch(URL)
+	.then(response=>response.json()) 
+	// function to be called when promise is resolved
+
+	.then(data=>{});
+}
+
+//Single driver specified by driverID or driverRef
+ function singleDriver(){
+    const URL = specifier.isInteger() //Setting domain based on either ID(integer) or REF(not integer)
+    ? DOMAIN + `drivers.php?id=${specifier}` 
+    : DOMAIN + `drivers.php?ref=${specifier}`;
+
+    fetch(URL)
+	.then(response=>response.json()) 
+	// function to be called when promise is resolved
+
+	.then(data=>{});
+}
+
+
+
+//  RACE RESULTS
+//Driver Race results specified by driverRef + season
+ function driverRaceResults(driverRef, season){
+    const URL = DOMAIN + `driverResults.php?driver=${driverRef}&season=${season}`
+
+    fetch(URL)
+	.then(response=>response.json()) 
+	// function to be called when promise is resolved
+
+	.then(data=>{});
+}
+
+//Race results specified by constructorRef + season
+ function constructorRaceResults(constructorRef, season){
+    const URL = DOMAIN + `constructorResults.php?constructor=${constructorRef}&season=${season}`
+
+    fetch(URL)
+	.then(response=>response.json()) 
+	// function to be called when promise is resolved
+
+	.then(data=>{});
+}
+
+
+
+//  RACES
+//All Races specified by season
+ function allRacesForSeason(season){
+    const URL = DOMAIN + `races.php?season=${season}`
+
+    fetch(URL)
+	.then(response=>response.json()) 
+	// function to be called when promise is resolved
+
+	.then(data=>{
+		//hidden and revealing pages
+		console.log(data);
+		document.querySelector('#home').classList.toggle('hidden');
+		document.querySelector('#browse').classList.toggle('hidden');
+		document.querySelector('#races').classList.toggle('hidden');
+		document.querySelector('#f1CarBackground').classList.toggle('hidden');
+		//successfully populates the table
+		populateRaces(data);
+	});
+
+}
+
+//Race specified by raceID
+ function singleRace(raceID){
+    const URL = DOMAIN + `races.php?id=${season}`
+
+    fetch(URL)
+	.then(response=>response.json()) 
+	// function to be called when promise is resolved
+
+	.then(data=>{});
+}
+
+
+
+//  Results
+//Results specified by raceID
+ function singleRaceResult(raceID){
+    const URL = DOMAIN + `results.php?race=${raceID}`
+
+    fetch(URL)
+	.then(response=>response.json()) 
+	// function to be called when promise is resolved
+
+	.then(data=>{});
+}
+
+//Results for all races specified by season
+ function allResultsForSeason(season){
+    const URL = DOMAIN + `results.php?season=${season}`
+
+    fetch(URL)
+	.then(response=>response.json()) 
+	// function to be called when promise is resolved
+
+	.then(data=>{});
+}
+
+
+
+//  Qualifying
+//All Qualifying results specified by raceID
+ function qualifyingResultsForRaceID(raceID){
+    const URL = DOMAIN + `qualifying.php?race=${raceID}`
+
+    fetch(URL)
+	.then(response=>response.json()) 
+	// function to be called when promise is resolved
+
+	.then(data=>{});
+}
+
+//All qualifying for all races specified by season
+ function qualifyingResultsForSeason(season){
+    const URL = DOMAIN + `qualifying.php?season=${season}`
+
+    fetch(URL)
+	.then(response=>response.json()) 
+	// function to be called when promise is resolved
+
+	.then(data=>{});
 }
