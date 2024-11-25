@@ -129,14 +129,16 @@ function populateRaceDetails(raceID){
 
     const raceData = JSON.parse(localStorage.getItem('raceData'));
     const race = raceData.find(r => r.id == raceID);
-    console.log(raceData)
+    
 
     document.querySelector("#resultsDescription #raceName").textContent = `${race.name}`;
     document.querySelector("#resultsDescription #circuitName").textContent = `${race.circuit.name}`;
-    
+
     const circuitLink = document.createElement('a');
     circuitLink.href = '#';
-    circuitLink.textContent = `${race.circuit.name}`;
+    circuitLink.style.color = 'red';
+    circuitLink.style.textDecorationLine = 'underline';
+    circuitLink.textContent = `${race.circuit.name} - See More`;
     circuitLink.addEventListener('click', () => {
         circuitDetailHandler(race.circuit.id);
     });
