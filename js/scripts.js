@@ -3,93 +3,99 @@
 //The window functions for the front page are below commented out, was getting an error for some reason
 //Next to do is populate qualifying and results and open that side of the browse page
 
+//Resizing the background
+window.addEventListener('resize', adjustBackgroundHeightGradient);
+window.addEventListener('resize', adjustBackgroundHeightF1Car);
 
+//Main DOMContentLoaded event listener
 document.addEventListener('DOMContentLoaded', () => {
-    const DOMAIN = "https://www.randyconnolly.com/funwebdev/3rd/api/f1/";
-    //loading years
-    const countrySelect = document.querySelector('#countriesSelector');
-    //Populates the selection box with data all the way back to 1950 (last day of data)
-    for(let i=2024; i>=1950; i--){
-        const optionElement = document.createElement('option');
-        optionElement.dataset.year = i;
-        optionElement.textContent = `${i}`;
-        countrySelect.appendChild(optionElement);
-    }
+    adjustBackgroundHeightF1Car();
+    adjustBackgroundHeightGradient();
 
-    //Listener for selecting a season
-    //Chat helped me with this, might want to research 'change' event so that we can use it
-    countrySelect.addEventListener('change', e =>{
-        //Getting year from dataset
-        const selectedOption = e.target.selectedOptions[0];
-        const year = selectedOption.dataset.year;
-        usedYear = year;
-        //Establishing URL
+    //season selector actions
+    createSeasonSelector()
+    seasonSelectChange();
 
-        const racesURL = DOMAIN + `races.php?season=${year}`;
-
-        //Fetching race data then populating
-        fetch(racesURL)
-	        .then(response=>response.json()) 
-	        //function to be called when promise is resolved
-	        .then(data=>{
-                //hidden and revealing pages
-                document.querySelector('#home').classList.toggle('hidden');
-                document.querySelector('#browse').classList.toggle('hidden');
-                document.querySelector('#races').classList.toggle('hidden');
-                //successfully populates the table
-                populateRaces(data);
-                localStorage.setItem('raceData', data);
-                
-            });
-    });
-    //not testing just writing some stuff, think it works. We can now pull off of localStorage
-    const racesSelect = document.querySelector('#races');
-    racesSelect.addEventListener('click', e => {
-        document.querySelector('#race-results').classList.toggle('hidden');
-        const raceID = e.target.dataset.id;
-        qualifyingURL = DOMAIN + `qualifying.php?race=${raceID}`
-        fetch(qualifyingURL)
-            .then(response=>response.json())
-
-            .then(data=>{
-                localStorage.setItem('qualifyingData', data);
-                populateQualifying(data);
-            })
-        resultsURL = DOMAIN + `results.php?race=${raceID}`;
-        fetch(resultsURL)
-            .then(response=>response.json())
-            
-            .then(data=> {
-                localStorage.setItem('resultsData', data);
-                populateResults(data);
-            })
-
-
-
-    })
+    //Race select actions
+    raceSelect();
 
     //Home button
+    homeButtonAction();
+    circuitDetailHandler(1)
+    })
+
+
+function populateCircuitDetails(data){
+    console.log(data)
+    document.querySelector('#circuitDetails #circuitName').textContent = `Name: ${data.name}`;
+    document.querySelector('#circuitDetails #circuitLocation').textContent = `Location: ${data.location}`;
+    document.querySelector('#circuitDetails #circuitCountry').textContent = `Country: ${data.countryl}`;
+    document.querySelector('#circuitDetails #circuitURL').textContent = `URL: ${data.url}`;
+}
+
+function circuitDetailHandler(circuitID){
+    document.querySelector("#circuit").classList.remove('hidden');
+    singleCircuit(circuitID);
+
+
+    document.querySelector('#circuit-x-close').addEventListener('click', e => {
+        document.querySelector("#circuit").classList.add('hidden');
+    })
+}
+
+function raceSelect(){
+    //Our buttons are loaded in dynamically, this approach uses event delegation
+    document.addEventListener('click', e => {
+        if (e.target && e.target.id === 'selectedRaceResultsButton') {
+            
+            const raceID = e.target.dataset.id;
+            
+            singleRaceResult(raceID);
+            qualifyingResultsForRaceID(raceID);
+            populateRaceDetails(raceID)
+
+        }
+    });
+}
+
+function homeButtonAction(){
     document.querySelector('#homeButton').addEventListener('click', e => {
         //removing and adding in case already on home page
         document.querySelector('#home').classList.remove('hidden');
         document.querySelector('#browse').classList.add('hidden');
         document.querySelector('#races').classList.add('hidden');
-        document.querySelector('#f1CarBackground').classList.toggle('hidden');
-
     })
+}
 
-});
+function seasonSelectChange(){
+    const seasonSelect = document.querySelector('#countriesSelector');
+    seasonSelect.addEventListener('change', e =>{
+        //Getting year from dataset
+        const selectedOption = e.target.selectedOptions[0];
+        const year = selectedOption.dataset.year;
+        if(year) // If year is not undefined
+            allRacesForSeason(year);
+    });
+}
+
+function createSeasonSelector(){
+    const seasonSelect = document.querySelector('#countriesSelector');
+    //Populates the selection box with data all the way back to 1950 (last day of data)
+    for(let i=2024; i>=1950; i--){
+        const optionElement = document.createElement('option');
+        optionElement.dataset.year = i;
+        optionElement.textContent = `${i}`;
+        seasonSelect.appendChild(optionElement);
+    }
+}
 
 
 
 
-//This is giving an error so i'm just commenting it out for now, trying to get started with the events
-//Should be fixed, recomment out if it contiues to break your code
-
-//Recalculate on based on a window resize
-function adjustBackgroundHeight() {
+//Sets the height of the F1 car background to the bottom of the visable webpage
+function adjustBackgroundHeightF1Car() {
     const background = document.querySelector('#f1CarBackground');
-    let contentHeight = 16;
+    let contentHeight = 112;
 
     // Get all elements before the background in the DOM tree
     let sibling = background.previousElementSibling;
@@ -104,12 +110,37 @@ function adjustBackgroundHeight() {
     background.style.height = `${remainingHeight}px`;
 }
 
-window.addEventListener('resize', adjustBackgroundHeight);
-document.addEventListener('DOMContentLoaded', adjustBackgroundHeight);
+//Sets the height of the gradient background to the bottom of the visable webpage
+function adjustBackgroundHeightGradient() {
+    const background = document.querySelector('#gradientBackground');
+    const homeNavbar = document.querySelector('#homeNavbar');
+    let contentHeight = homeNavbar.offsetHeight;
 
+    const remainingHeight = window.innerHeight - contentHeight;
+
+    // Set the background height to the remaining height
+    background.style.height = `${remainingHeight}px`;
+}
+
+function populateRaceDetails(raceID){
+
+    const raceData = JSON.parse(localStorage.getItem('raceData'));
+    const race = raceData.find(r => r.id == raceID);
+
+    document.querySelector("#resultsDescription #raceName").textContent = `Race Name: ${race.name}`;
+    document.querySelector("#resultsDescription #circuitName").textContent = `Name: ${race.circuit.name}`;
+    document.querySelector("#resultsDescription #circuitRound").textContent = `Round: ${race.round}`;
+    document.querySelector("#resultsDescription #raceDate").textContent = `Date: ${race.date}`;
+    document.querySelector("#resultsDescription #raceURL").textContent = `URL: ${race.url}`;
+
+}
+
+//Name, Round #, Year, Circuit Name, Date, URL
 
 //Populates the races tables with data
 function populateRaces(data){
+    //Setting races title to Season year
+    document.querySelector('#racesSeason').textContent = `${data[0].year} Races`;
     //Clear HTML for new data
     document.querySelector('#racesTableBody').innerHTML = '';
     data.forEach(d => {
@@ -132,7 +163,16 @@ function populateRaces(data){
         const tdResults = document.createElement('td');
         tdResults.className = 'border border-black px-2 py-1 text-red-600';
         tdResults.dataset.id = d.id;
-        tdResults.textContent = 'Results';
+        
+        
+        const button = document.createElement('button');
+        button.className = 'text-custom-f1-red font-semibold hover:text-white';
+        button.id = "selectedRaceResultsButton"
+        button.dataset.id = d.id;
+
+        button.textContent = 'Results';
+        
+        tdResults.appendChild(button);
         trElement.appendChild(tdResults);
 
         //Add to the table body 
@@ -191,8 +231,17 @@ function populateQualifying(data){
     })
 }
 
+function populateWinners(data){
+    document.querySelector('#first h4').textContent = `${data[0].driver.forename} ${data[0].driver.surname}`;
+    document.querySelector('#second h4').textContent = `${data[1].driver.forename} ${data[1].driver.surname}`;
+    document.querySelector('#third h4').textContent = `${data[2].driver.forename} ${data[2].driver.surname}`;
+}
+
 //Populates the results table, sort before using
 function populateResults(data){
+    //Changing titles
+    document.querySelector('#resultsTitle').textContent = `Results for ${data[0].race.year} ${data[0].race.name}`
+
     document.querySelector('#resultsTableBody').innerHTML = '';
     //Loop through all data
     data.forEach(d =>{
@@ -273,10 +322,18 @@ const DOMAIN = "https://www.randyconnolly.com/funwebdev/3rd/api/f1/"
     const URL = DOMAIN + `circuits.php?id=${circuitID}`
 
     fetch(URL)
-	.then(response=>response.json()) 
-	// function to be called when promise is resolved
-
-	.then(data=>{});
+    .then(response =>response.json())
+    .then(data => {
+        if(!data.hasOwnProperty('error')) //Checking if the circuitID result exist
+        {
+            populateCircuitDetails(data);
+        }
+        else
+            console.log(`The circuitID ${circuitID} does not exist`);
+    })
+    .catch(error => {
+        console.error('There has been a problem with the fetch operation:', error);
+    });
 }
 
 
@@ -366,31 +423,33 @@ const DOMAIN = "https://www.randyconnolly.com/funwebdev/3rd/api/f1/"
     const URL = DOMAIN + `races.php?season=${season}`
 
     fetch(URL)
-	.then(response=>response.json()) 
-	// function to be called when promise is resolved
-
-	.then(data=>{
-		//hidden and revealing pages
-		console.log(data);
-		document.querySelector('#home').classList.toggle('hidden');
-		document.querySelector('#browse').classList.toggle('hidden');
-		document.querySelector('#races').classList.toggle('hidden');
-		document.querySelector('#f1CarBackground').classList.toggle('hidden');
-		//successfully populates the table
-		populateRaces(data);
-	});
+    .then(response=>response.json()) 
+    //function to be called when promise is resolved
+    .then(data=>{
+        //hidden and revealing pages
+        document.querySelector('#home').classList.toggle('hidden');
+        document.querySelector('#browse').classList.toggle('hidden');
+        document.querySelector('#races').classList.toggle('hidden');
+        //successfully populates the table
+        populateRaces(data);
+        localStorage.setItem('raceData', JSON.stringify(data));
+        
+    });
 
 }
 
 //Race specified by raceID
  function singleRace(raceID){
-    const URL = DOMAIN + `races.php?id=${season}`
+    const URL = DOMAIN + `races.php?id=${raceID}`
 
     fetch(URL)
-	.then(response=>response.json()) 
-	// function to be called when promise is resolved
+    .then(response=>response.json())
 
-	.then(data=>{});
+    .then(data=>{
+        localStorage.setItem('qualifyingData', data);
+        populateQualifying(data);
+    })
+
 }
 
 
@@ -401,10 +460,21 @@ const DOMAIN = "https://www.randyconnolly.com/funwebdev/3rd/api/f1/"
     const URL = DOMAIN + `results.php?race=${raceID}`
 
     fetch(URL)
-	.then(response=>response.json()) 
-	// function to be called when promise is resolved
-
-	.then(data=>{});
+    .then(response =>response.json())
+    .then(data => {
+        localStorage.setItem('resultsData', data);
+        if(!data.hasOwnProperty('error')) //Checking if the raceID results exist
+        {
+            document.querySelector('#race-results').classList.remove('hidden'); //Revealing the results page only if result data is found
+            populateWinners(data);
+            populateResults(data);
+        }
+        else
+            console.log(`The raceID ${raceID} does not exist`);
+    })
+    .catch(error => {
+        console.error('There has been a problem with the fetch operation:', error);
+    });
 }
 
 //Results for all races specified by season
@@ -426,10 +496,19 @@ const DOMAIN = "https://www.randyconnolly.com/funwebdev/3rd/api/f1/"
     const URL = DOMAIN + `qualifying.php?race=${raceID}`
 
     fetch(URL)
-	.then(response=>response.json()) 
-	// function to be called when promise is resolved
-
-	.then(data=>{});
+    .then(response =>response.json())
+    .then(data => {
+        localStorage.setItem('qualifyingData', data);
+        if(!data.hasOwnProperty('error')) //Checking if the raceID results exist
+        {   
+            populateQualifying(data);
+        }
+        else
+            console.log(`The raceID ${raceID} does not exist`);
+    })
+    .catch(error => {
+        console.error('There has been a problem with the fetch operation:', error);
+    });
 }
 
 //All qualifying for all races specified by season

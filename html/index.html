@@ -45,7 +45,7 @@
             <!--Button taken from https://www.creative-tim.com/twcomponents/component/select-input-field-->
             <div class="bg-custom-gray-primary shadow-lg rounded-lg p-4 ml-7 inline-block items-start justify-center w-2/4">
                 <div class="max-w-2xl mx-auto">
-                    <select id="countriesSelector" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <select id="countriesSelector" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >
                         <option data-id="0" selected>Choose a season</option>
                 </select>
                 </div>
@@ -53,25 +53,27 @@
             
         </div>
           
+        <img id="f1CarBackground" src="../src/images/f1Car.jpg" class="w-full h-full p-0 m-0">
         
     </article>
     
-    <img id="f1CarBackground" src="../src/images/f1Car.jpg" class="w-full h-full p-0 m-0">
+    
 
 
     <!-- Attempting to add somesort of nice gradient as a background, currently struggling with making sure it extends to the very bottom of the screen
      For some reason it needs a weird style height, I will fix this soon-->
-    <article id="browse" class="h-full hidden w-full" style="min-height:100vh; background-image: linear-gradient(to top, #1f2937, #1f1f2a, #1b161d, #120d10, #000000); overflow: auto;">
+    <article id="browse" class="h-full hidden w-full">
+        <div id="gradientBackground" class="gradientBackground h-full bg-gradient-to-t from-gray-900 via-gray-800 to-black overflow-auto">
         
-            <div class="flex space-x-4 p-4">
+            <div class="flex space-x-4 p-4 h-auto">
 
-                <section id="races" class="w-[350px] h-[585px] hidden bg-blue-500 shadow-lg rounded-lg  p-4">
+                <section id="races" class="w-auto h-auto hidden bg-blue-500 shadow-lg rounded-lg p-4">
 
-                    <h1 class="font-bold text-center text-3xl p-4">
+                    <h1 id="racesSeason" class="font-bold text-center text-3xl p-4">
                         2023 Races
                     </h1>
 
-                    <div class="h-[470px] overflow-y-auto">
+                    <div class="h-full overflow-y-auto">
 
                         <table id="racesTable" class="table-auto  overflow-y-auto rounded-lg border-2 border-black w-full text-left">
                             <thead class="text-bold">
@@ -87,13 +89,24 @@
 
                 </section>
 
-                <section id="race-results" class="w-[1170px] h-[585px] hidden mx-10 bg-blue-500 shadow-lg rounded-lg p-4 space-x-4">
+                <section id="race-results" class="w-full h-auto hidden mx-10 bg-blue-500 shadow-lg rounded-lg p-4 space-x-4">
 
-                    <h1 class="font-bold text-center text-3xl p-4">Results for 2023 Italian Grand Prix</h1>
-                    <h2 class="font-bold text-center text-xl p-4">Name, Round #, Year, Circuit Name, Date, URL</h2>
+                    <h1 id="resultsTitle" class="font-bold text-center text-3xl p-4">Results for 2023 Italian Grand Prix</h1>
+                    <h2 class="font-bold text-center text-xl">Circuit Details</h2>
+                    <div id="resultsDescription">
+                        <ul id="raceName">Race Name</ul>
+                        <ul id="circuitRound">Round #</ul>
+                        <ul id="circuitName">Circuit Name</ul>
+                        <ul id="raceDate">Date</ul>
+                        <ul id="raceURL">URL</ul>
 
-                    <div class="flex space-x-2 h=[470px]">
+                    </div>
 
+                    <div class="flex space-x-2">
+                        <div id="circuitDetails">
+                            
+
+                        </div>
                         <div id="qualifying" class="p-2 w-full">
 
                             <h3 class="font-bold text-center text-2xl p-4">Qualifying</h3>
@@ -160,11 +173,12 @@
                     </div>
                 </section>
             </div>
+        </div>
     </article>
 
     <!--https://www.youtube.com/watch?v=7KmXhRJuEi8-->
-    <dialog open id="circuit" class="fixed hidden left-0 top-0 bg-black bg-opacity-50 h-full w-full flex justify-center items-center">
-        <div id="modal" class="w-[70%] h-[70%] bg-gray-200 p-12 rounded-lg shadow-lg">
+    <dialog open id="circuit" class="fixed left-0 top-0 bg-black bg-opacity-50 h-full w-full flex justify-center items-center">
+        <div id="modal" class="w-[70%] h-[70%] bg-blue-500 p-12 rounded-lg shadow-lg">
 
             <header class="flex justify-between px-8 items-center">
                 <h1 class="pl-[360px] text-center text-3xl">Circuit Details</h1>
@@ -177,13 +191,13 @@
                     <img src="../src/images/sample_for_circuit.png" />
                 </div>
 
-                <div class="w-1/2 px-4 py-8">
+                <div id="circuitDetails" class="w-1/2 px-4 py-8">
                     <ul class="text-2xl text-center text-red-600">
                         <!--this will be populated by js function-->
-                        <li>Name</li>
-                        <li>Location</li>
-                        <li>Country</li>
-                        <li>URL</li>
+                        <li id="circuitName">Name</li>
+                        <li id="circuitLocation">Location</li>
+                        <li id="circuitCountry">Country</li>
+                        <li id="circuitURL">URL</li>
                     </ul>
                     <div class="flex justify-center items-center pt-12">
                         <button id="add-favorites" class="text-3xl bg-transparent hover:bg-blue-500 text-black font-semibold hover:text-white py-4 px-8 border-2 border-black hover:border-transparent rounded mr-3">
