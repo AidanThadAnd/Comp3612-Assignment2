@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //Home button
     homeButtonAction();
     //NOTE: circuitDetailHandler is just calling a random circuit, we will be actually using this function when a user clicks on a circuit, this is only for testing
-    circuitDetailHandler(1)
+    //circuitDetailHandler(1)
     })
 
 
@@ -129,9 +129,20 @@ function populateRaceDetails(raceID){
 
     const raceData = JSON.parse(localStorage.getItem('raceData'));
     const race = raceData.find(r => r.id == raceID);
+    console.log(raceData)
 
     document.querySelector("#resultsDescription #raceName").textContent = `${race.name}`;
     document.querySelector("#resultsDescription #circuitName").textContent = `${race.circuit.name}`;
+    
+    const circuitLink = document.createElement('a');
+    circuitLink.href = '#';
+    circuitLink.textContent = `${race.circuit.name}`;
+    circuitLink.addEventListener('click', () => {
+        circuitDetailHandler(race.circuit.id);
+    });
+
+    document.querySelector("#resultsDescription #circuitName").innerHTML = '';
+    document.querySelector("#resultsDescription #circuitName").appendChild(circuitLink);
     document.querySelector("#resultsDescription #circuitRound").textContent = `${race.round}`;
     document.querySelector("#resultsDescription #raceDate").textContent = `${race.date}`;
     document.querySelector("#resultsDescription #raceURL").textContent = `${race.url}`;
