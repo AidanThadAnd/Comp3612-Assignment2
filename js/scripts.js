@@ -42,6 +42,9 @@ function circuitDetailHandler(circuitID){
     document.querySelector('#circuit-x-close').addEventListener('click', e => {
         document.querySelector("#circuit").classList.add('hidden');
     })
+    document.querySelector('#circuit-close').addEventListener('click', e => {
+        document.querySelector("#circuit").classList.add('hidden');
+    })
 }
 
 function raceSelect(){
