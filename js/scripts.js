@@ -27,11 +27,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 function populateCircuitDetails(data){
-    console.log(data)
-    document.querySelector('#circuitDetails #circuitName').textContent = `Name: ${data.name}`;
-    document.querySelector('#circuitDetails #circuitLocation').textContent = `Location: ${data.location}`;
-    document.querySelector('#circuitDetails #circuitCountry').textContent = `Country: ${data.country}`;
-    document.querySelector('#circuitDetails #circuitURL').textContent = `URL: ${data.url}`;
+    document.querySelector('#circuitDetails #circuitName').textContent = `${data.name}`;
+    document.querySelector('#circuitDetails #circuitLocation').textContent = `${data.location}`;
+    document.querySelector('#circuitDetails #circuitCountry').textContent = `${data.country}`;
+    document.querySelector('#circuitDetails #circuitURL').textContent = `${data.url}`;
 }
 
 function circuitDetailHandler(circuitID){
@@ -131,11 +130,11 @@ function populateRaceDetails(raceID){
     const raceData = JSON.parse(localStorage.getItem('raceData'));
     const race = raceData.find(r => r.id == raceID);
 
-    document.querySelector("#resultsDescription #raceName").textContent = `Race Name: ${race.name}`;
-    document.querySelector("#resultsDescription #circuitName").textContent = `Name: ${race.circuit.name}`;
-    document.querySelector("#resultsDescription #circuitRound").textContent = `Round: ${race.round}`;
-    document.querySelector("#resultsDescription #raceDate").textContent = `Date: ${race.date}`;
-    document.querySelector("#resultsDescription #raceURL").textContent = `URL: ${race.url}`;
+    document.querySelector("#resultsDescription #raceName").textContent = `${race.name}`;
+    document.querySelector("#resultsDescription #circuitName").textContent = `${race.circuit.name}`;
+    document.querySelector("#resultsDescription #circuitRound").textContent = `${race.round}`;
+    document.querySelector("#resultsDescription #raceDate").textContent = `${race.date}`;
+    document.querySelector("#resultsDescription #raceURL").textContent = `${race.url}`;
 
 }
 
