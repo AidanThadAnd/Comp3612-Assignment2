@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //Home button
     homeButtonAction();
+    //NOTE: circuitDetailHandler is just calling a random circuit, we will be actually using this function when a user clicks on a circuit, this is only for testing
     circuitDetailHandler(1)
     })
 
