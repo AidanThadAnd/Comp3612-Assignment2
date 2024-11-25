@@ -30,7 +30,7 @@ function populateCircuitDetails(data){
     console.log(data)
     document.querySelector('#circuitDetails #circuitName').textContent = `Name: ${data.name}`;
     document.querySelector('#circuitDetails #circuitLocation').textContent = `Location: ${data.location}`;
-    document.querySelector('#circuitDetails #circuitCountry').textContent = `Country: ${data.countryl}`;
+    document.querySelector('#circuitDetails #circuitCountry').textContent = `Country: ${data.country}`;
     document.querySelector('#circuitDetails #circuitURL').textContent = `URL: ${data.url}`;
 }
 
