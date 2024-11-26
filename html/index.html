@@ -59,10 +59,7 @@
     
     
 
-
-    <!-- Attempting to add somesort of nice gradient as a background, currently struggling with making sure it extends to the very bottom of the screen
-     For some reason it needs a weird style height, I will fix this soon-->
-    <article id="browse" class="h-full hidden w-full">
+    <article id="browse" class=" hidden w-full">
         <div id="gradientBackground" class="gradientBackground h-full bg-gradient-to-t from-gray-900 via-gray-800 to-black overflow-auto">
         
             <div class="flex space-x-4 p-4 h-auto">
@@ -75,7 +72,7 @@
 
                     <div class="h-full overflow-y-auto">
 
-                        <table id="racesTable" class="table-auto  overflow-y-auto rounded-lg border-2 border-black w-full text-left">
+                        <table id="racesTable" class="table-auto overflow-y-auto rounded-lg border-2 border-black w-full text-left ">
                             <thead class="text-bold">
                                 <tr>
                                     <th class="border border-black px-2 py-2">Rnd</th>
@@ -92,42 +89,38 @@
                 <section id="race-results" class="w-full h-auto hidden mx-10 bg-blue-500 shadow-lg rounded-lg p-4 space-x-4">
 
                     <h1 id="resultsTitle" class="font-bold text-center text-3xl p-4">Results for 2023 Italian Grand Prix</h1>
-                    <h2 class="font-bold text-center text-xl w-1/2">Circuit Details</h2>
-                    <div id="resultsDescription">
-                        <table class="table-auto rounded-lg border-2 border-black w-1/2 text-left">
-                            <tbody>
-                                <tr>
-                                    <td class="border border-black px-2 py-2">Race Name</td>
-                                    <td id="raceName" class="border border-black px-2 py-2"></td>
-                                </tr>
-                                <tr>
-                                    <td class="border border-black px-2 py-2">Round #</td>
-                                    <td id="circuitRound" class="border border-black px-2 py-2"></td>
-                                </tr>
-                                <tr>
-                                    <td class="border border-black px-2 py-2">Circuit Name</td>
-                                    <td id="circuitName" class="border border-black px-2 py-2"></td>
-                                </tr>
-                                <tr>
-                                    <td class="border border-black px-2 py-2">Date</td>
-                                    <td id="raceDate" class="border border-black px-2 py-2"></td>
-                                </tr>
-                                <tr>
-                                    <td class="border border-black px-2 py-2">URL</td>
-                                    <td id="raceURL" class="border border-black px-2 py-2"></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    
 
-                    </div>
 
                     <div class="flex space-x-2">
-                        <div id="circuitDetails">
-                            
-
-                        </div>
                         <div id="qualifying" class="p-2 w-full">
-
+                            <div id="resultsDescription">
+                                <h3 class="font-bold text-center text-2xl w-full pt-2">Circuit Details</h3>
+                                <table class="table-auto rounded-lg border-2 border-black text-left w-full">
+                                    <tbody>
+                                        <tr>
+                                            <td class="border border-black px-2 py-2">Race Name</td>
+                                            <td id="raceName" class="border border-black px-2 py-2"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="border border-black px-2 py-2">Round #</td>
+                                            <td id="circuitRound" class="border border-black px-2 py-2"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="border border-black px-2 py-2">Circuit Name</td>
+                                            <td id="circuitName" class="border border-black px-2 py-2"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="border border-black px-2 py-2">Date</td>
+                                            <td id="raceDate" class="border border-black px-2 py-2"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="border border-black px-2 py-2">URL</td>
+                                            <td id="raceURL" class="border border-black px-2 py-2"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                             <h3 class="font-bold text-center text-2xl p-4">Qualifying</h3>
 
                             <table id="qualifyingTable" class="table-auto w-full rounded-lg border-2 border-black text-left">
@@ -147,7 +140,7 @@
                             </table>
                         </div>
 
-                        <div id="results" class="p-2 w-full">
+                        <div id="results" class="p-2 pt-0 w-full">
 
                             <h3 class="font-bold text-center text-2xl px-4 py-2">Results</h3>
 
@@ -157,24 +150,24 @@
                                     <!--Just a template, haven't found images-->
                                     <h4 class="font-bold text-center text-xl p-2">Max Verstappen</h4>
                                     <div class="flex justify-center">
-                                        <img src="../src/images/1st-place-medal.svg" class="size-24"/>
+                                        <img src="../src/images/1st-place-medal.svg" class="size-48"/>
                                     </div>
                                 </div>
                                 <div id="second">
                                     <h4 class="font-bold text-center text-xl p-2">Charles Leblanc</h4>
                                     <div class="flex justify-center">
-                                        <img src="../src/images/2nd-place-medal.svg" class="size-24"/>
+                                        <img src="../src/images/2nd-place-medal.svg" class="size-48"/>
                                     </div>
                                 </div>
                                 <div id="third">
                                     <h4 class="font-bold text-center text-xl p-2">Lewis Hamilton</h4>
                                     <div class="flex justify-center">
-                                        <img src="../src/images/3rd-place-medal.svg" class="size-24"/>
+                                        <img src="../src/images/3rd-place-medal.svg" class="size-48"/>
                                     </div>
                                 </div>
                             </div>
 
-                            <table id="resultsTable" class="table-auto rounded-lg border-2 border-black w-full mt-4 text-left">
+                            <table id="resultsTable" class="table-auto rounded-lg border-2 border-black w-full mt-5 text-left">
                                 <thead class="text-bold">
                                     <tr>
                                         <th class="border border-black px-2 py-2">Pos</th>
@@ -196,8 +189,8 @@
     </article>
 
     <!--https://www.youtube.com/watch?v=7KmXhRJuEi8-->
-    <dialog open id="circuit" class="fixed left-0 top-0 hidden bg-black bg-opacity-50 h-full w-full flex justify-center items-center ">
-        <div id="modal" class="w-[70%] h-[70%] bg-blue-500 p-12 rounded-lg shadow-lg">
+    <dialog open id="circuit" class="fixed left-0 top-0 hidden bg-black bg-opacity-50 h-full w-full flex justify-center items-center">
+        <div id="modal" class="w-[70%] h-[70%] bg-blue-500 p-12 rounded-lg shadow-lg justify-center">
 
             <header class="flex justify-between px-8 items-center">
                 <h1 class="pl-[360px] text-center text-3xl">Circuit Details</h1>
@@ -206,12 +199,12 @@
 
             <section class="flex">
 
-                <div class="w-1/2 p-4 flex justify-center ">
+                <div class="w-1/2 p-4 flex ">
                     <img src="../src/images/sample_for_circuit.png" />
                 </div>
 
-                <div id="circuitDetails" class="w-1/2 px-4 py-8">
-                    <table class="table-auto rounded-lg border-2 border-black w-full text-left">
+                <div id="circuitDetails" class="w-1/2 px-4 py-8 ">
+                    <table class="table-auto rounded-lg border-2 border-black w-full text-left h-[400px] overflow-y-scroll">
                         <tbody>
                             <tr>
                                 <td class="border border-black px-2 py-2">Circuit Name</td>
@@ -237,62 +230,70 @@
                         </button>
                     </div>
                 </div>
-
             </section>
             <button id="circuit-close" class="bg-transparent hover:bg-blue-500 text-black font-semibold hover:text-white py-2 px-4 border border-black hover:border-transparent rounded mr-3 ml-[920px]">Close</button>
         </div>
+        
     </dialog>
+    
 
     <dialog id="drivers" class="fixed hidden left-0 top-0 bg-black bg-opacity-50 h-full w-full flex justify-center items-center">
-        <div id="modal" class="w-[70%] h-[70%] bg-gray-200 p-12 rounded-lg shadow-lg">
+        <div id="modal" class="w-[70%] h-[70%] bg-blue-500 p-12 rounded-lg shadow-lg">
             <header class="flex justify-between px-8 items-center">
                 <h1 class="pl-[360px] text-center text-3xl">Driver Details</h1>
                 <button id="driver-x-close" class="size-12"><img src="../src/images/close_icon.svg"></button>
             </header>
             <section class="flex">
                 <div class="justify-center p-4">
-                    <ul class="text-2xl text-center text-red-600">
+                    <ul id="driverInformation" class="text-2xl text-center text-red-600">
                         <!--this will be populated by js function-->
-                        <li>Name</li>
-                        <li>Location</li>
-                        <li>Country</li>
-                        <li>URL</li>
+                        <li id="driverName">Name</li>
+                        <li id="driverDOB">Dob</li>
+                        <li id="driverAge">Age</li>
+                        <li id="driverNationality">Nationality</li>
+                        <li id="driverURL">URL</li>
                     </ul>
                     <div class="flex justify-center items-center pt-20 ml-3">
-                        <button id="add-favorites" class="text-2xl bg-transparent hover:bg-blue-500 text-black font-semibold hover:text-white py-2 px-4 border-2 border-black hover:border-transparent rounded mr-3">
+                        <button id="add-favorites" class="text-2xl bg-transparent hover:bg-blue-200 text-black font-semibold hover:text-white py-2 px-4 border-2 border-black hover:border-transparent rounded mr-3">
                             Add Favorites
                         </button>
                     </div>
                 </div>
-
-                <div class="w-full h-[200px] mt-3">
-                    <table id="driversTable" class="table-auto rounded-lg border-2 border-black w-full text-left">
-                        <thead class="text-bold">
-                            <tr>
-                                <th class="border border-black px-2 py-2">Rnd</th>
-                                <th class="border border-black px-2 py-2">Name</th>
-                                <th class="border border-black px-2 py-2">Pos</th>
-                                <th class="border border-black px-2 py-2">Points</th>
-                            </tr>
-                        </thead>
-                        <tbody clas="overflow-y-auto">
-                            <tr>
-                                <td class="border border-black px-2 py-1">1</td>
-                                <td class="border border-black px-2 py-1">British Grand Prix</td>
-                                <td class="border border-black px-2 py-1">1</td>
-                                <td class="border border-black px-2 py-1">10</td>   
-                            </tr>        
-                        </tbody>
-                    </table>
+    
+                <div class="w-full mt-3 overflow-hidden">
+                    <!-- Ensure the parent container has overflow-y-auto -->
+                    <div class="h-[400px] overflow-y-auto border border-black rounded-lg">
+                        <table id="driversTable" class="table-auto w-full text-left">
+                            <thead class="text-bold">
+                                <tr>
+                                    <th class="border border-black px-2 py-2">Rnd</th>
+                                    <th class="border border-black px-2 py-2">Name</th>
+                                    <th class="border border-black px-2 py-2">Pos</th>
+                                    <th class="border border-black px-2 py-2">Points</th>
+                                </tr>
+                            </thead>
+                            <tbody id="driverTableBody">
+                                <tr>
+                                    <td id="driverRnd" class="border border-black px-2 py-1">1</td>
+                                    <td id="driverName" class="border border-black px-2 py-1">British Grand Prix</td>
+                                    <td id="driverPos" class="border border-black px-2 py-1">1</td>
+                                    <td id="driverPoints" class="border border-black px-2 py-1">10</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                  
             </section>
-            <button id="driver-close" class="bg-transparent hover:bg-blue-500 text-black font-semibold hover:text-white py-2 px-4 border border-black hover:border-transparent rounded mr-3 mt-3 ml-[920px]">Close</button>
+            <button id="driver-close" class="bg-transparent hover:bg-blue-200 text-black font-semibold hover:text-white py-2 px-4 border border-black hover:border-transparent rounded mr-3 mt-3 ml-[920px]">
+                Close
+            </button>
         </div>
     </dialog>
     
+    
+
     <dialog id="constructor" class="fixed hidden left-0 top-0 bg-black bg-opacity-50 h-full w-full flex justify-center items-center">
-        <div id="modal" class="w-[70%] h-[70%] bg-gray-200 p-12 rounded-lg shadow-lg">
+        <div id="modal" class="w-[70%] h-[70%] bg-blue-500 p-12 rounded-lg shadow-lg">
             <header class="flex justify-between px-8 items-center">
                 <h1 class="pl-[320px] text-center text-3xl">Constructor Details</h1>
                 <button id="constructor-x-close" class="size-12"><img src="../src/images/close_icon.svg"></button>
@@ -300,42 +301,47 @@
             <section class="flex">
                 <div class="justify-center h-[330px] p-4">
                     <ul class="text-2xl text-center text-red-600">
-                        <!--this will be populated by js function-->
-                        <li>Name</li>
-                        <li>Nationality</li>
-                        <li>URL</li>
+                        <li id="constructorName">Name</li>
+                        <li id="constructorNationality">Nationality</li>
+                        <li id="constructorURL">URL</li>
                     </ul>
                     <div class="flex justify-center items-center pt-20 ml-3">
-                        <button id="add-favorites" class="text-2xl bg-transparent hover:bg-blue-500 text-black font-semibold hover:text-white py-2 px-4 border-2 border-black hover:border-transparent rounded mr-3">
+                        <button id="add-favorites" class="text-2xl bg-transparent hover:bg-blue-200 text-black font-semibold hover:text-white py-2 px-4 border-2 border-black hover:border-transparent rounded mr-3">
                             Add Favorites
                         </button>
                     </div>
                 </div>
-
-                <div class="w-full h-[200px] mt-3">
-                    <table id="constructorTable" class="table-auto rounded-lg border-2 border-black w-full text-left">
-                        <thead class="text-bold">
-                            <tr>
-                                <th class="border border-black px-2 py-2">Rnd</th>
-                                <th class="border border-black px-2 py-2">Name</th>
-                                <th class="border border-black px-2 py-2">Pos</th>
-                                <th class="border border-black px-2 py-2">Points</th>
-                            </tr>
-                        </thead>
-                        <tbody clas="overflow-y-auto">
-                            <tr>
-                                <td class="border border-black px-2 py-1">1</td>
-                                <td class="border border-black px-2 py-1">British Grand Prix</td>
-                                <td class="border border-black px-2 py-1">1</td>
-                                <td class="border border-black px-2 py-1">10</td>   
-                            </tr>        
-                        </tbody>
-                    </table>
+    
+                <div class="w-full mt-3 overflow-hidden">
+                    <!-- Ensure parent container has overflow-y-auto -->
+                    <div class="h-[400px] overflow-y-auto border border-black rounded-lg">
+                        <table id="constructorTable" class="table-auto w-full text-left">
+                            <thead class="text-bold">
+                                <tr>
+                                    <th class="border border-black px-2 py-2">Rnd</th>
+                                    <th class="border border-black px-2 py-2">Name</th>
+                                    <th class="border border-black px-2 py-2">Driver</th>
+                                    <th class="border border-black px-2 py-2">Pos</th>
+                                </tr>
+                            </thead>
+                            <tbody id="constructorTableBody">
+                                <tr>
+                                    <td class="border border-black px-2 py-1">1</td>
+                                    <td class="border border-black px-2 py-1">British Grand Prix</td>
+                                    <td class="border border-black px-2 py-1">1</td>
+                                    <td class="border border-black px-2 py-1">10</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </section>
-            <button id="constructor-close" class="bg-transparent hover:bg-blue-500 text-black font-semibold hover:text-white py-2 px-4 border border-black hover:border-transparent rounded mr-3 ml-[920px]">Close</button>
+            <button id="constructor-close" class="bg-transparent hover:bg-blue-200 text-black font-semibold hover:text-white py-2 px-4 border border-black hover:border-transparent rounded mr-3 ml-[920px] mt-6">
+                Close
+            </button>
         </div>
     </dialog>
+    
 
     <dialog id="favorites" class="fixed hidden left-0 top-0 bg-black bg-opacity-50 h-full w-full flex justify-center items-center">
         <div id="modal" class="w-[70%] h-[70%] bg-gray-200 p-12 rounded-lg shadow-lg">
