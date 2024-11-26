@@ -24,9 +24,200 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     constructorSelect()
-    driverSelect()
+    driverSelect();
+    loadFavoriteButtons();
+    favoriteButtonAction();
+
+    reSortButtons();
+})
+
+
+
+function reSortButtons(){
+    document.querySelector('#qualifyingPosHeader').addEventListener('click', e => {
+        console.log("Pos Clicked")
+        console.log(`raceID: ${localStorage.getItem('currentSelectedRaceID')}`)
+        //console.log(`raceData ${JSON.stringify(qualifyingResultsForRaceID(1098))}`)
+
+        reSortAlgorithm(e.target.textContent)
+    })
+
+    document.querySelector('#qualifyingNameHeader').addEventListener('click', e => {
+        console.log("Name Clicked")
+        reSortAlgorithm(e.target.textContent)
+    })
+
+    document.querySelector('#qualifyingConstHeader').addEventListener('click', e => {
+        console.log("Const Clicked")
+        reSortAlgorithm(e.target.textContent)
+    })
+
+    document.querySelector('#qualifyingQ1Header').addEventListener('click', e => {
+        console.log("Q1 Clicked")
+        reSortAlgorithm(e.target.textContent)
+    })
+
+    document.querySelector('#qualifyingQ2Header').addEventListener('click', e => {
+        console.log("Q2 Clicked")
+        reSortAlgorithm(e.target.textContent)
+    })
+
+    document.querySelector('#qualifyingQ3Header').addEventListener('click', e => {
+        console.log("Q3 Clicked")
+        reSortAlgorithm(e.target.textContent)
+    })
+}
+
+function reSortAlgorithm(buttonName){
+    let data = JSON.parse(localStorage.getItem('qualifyingResultsForRace'))
+    console.log(data)
+    let sortedData = data;
+    switch(buttonName){
+        case 'Pos':
+            sortedData.sort((a, b) => a.position - b.position);
+            break;
+        case 'Name':
+            sortedData.sort((a, b) => a.driver.surname.localeCompare(b.driver.surname));
+            sortedData.sort((a, b) => a.driver.forename.localeCompare(b.driver.forename));
+            break;
+        case 'Const':
+            sortedData.sort((a, b) => a.constructor.name.localeCompare(b.constructor.name));
+            break;
+        case 'Q1':
+            sortedData.sort((a, b) => {
+                const timeToSeconds = (time) => {
+                    const [minutes, seconds] = time.split(':');
+                    return parseFloat(minutes) * 60 + parseFloat(seconds);
+                };
+                return timeToSeconds(a.q1) - timeToSeconds(b.q1);
+            });
+            break;
+        case 'Q2':
+            sortedData.sort((a, b) => {
+                const timeToSeconds = (time) => {
+                    const [minutes, seconds] = time.split(':');
+                    return parseFloat(minutes) * 60 + parseFloat(seconds);
+                };
+                return timeToSeconds(a.q2) - timeToSeconds(b.q2);
+            });
+            break;
+        case 'Q3':
+            sortedData.sort((a, b) => {
+                const timeToSeconds = (time) => {
+                    const [minutes, seconds] = time.split(':');
+                    return parseFloat(minutes) * 60 + parseFloat(seconds);
+                };
+                return timeToSeconds(a.q3) - timeToSeconds(b.q3);
+            });
+            break;
+    }
+    console.log(sortedData)
+    populateQualifying(sortedData);
+}
+
+
+function populateFavoriteCircuits(data){
+    document.querySelector('#favoriteCircuitsTableBody').innerHTML = '';
+    console.log(data)
+    data.forEach(d => {
+
+        //Create row element
+        const circuitsElement = document.createElement('tr');
+        
+        //Add each column element
+        const favoriteCircuitsName = document.createElement('td');
+        favoriteCircuitsName.className = 'border border-black px-2 py-1';
+        favoriteCircuitsName.textContent = d;
+        circuitsElement.appendChild(favoriteCircuitsName);
+
+        // Append the row to the table body
+        document.querySelector('#favoriteCircuitsTableBody').appendChild(circuitsElement);
+    })
+}
+
+function populateFavoriteConstructors(data){
+    document.querySelector('#favoriteConstructorsTableBody').innerHTML = '';
+    console.log(data)
+    data.forEach(d => {
+
+        //Create row element
+        const constructorElement = document.createElement('tr');
+        
+        //Add each column element
+        const favoriteConstructorName = document.createElement('td');
+        favoriteConstructorName.className = 'border border-black px-2 py-1';
+        favoriteConstructorName.textContent = d;
+        constructorElement.appendChild(favoriteConstructorName);
+
+        // Append the row to the table body
+        document.querySelector('#favoriteConstructorsTableBody').appendChild(constructorElement);
+    })
+}
+
+function populateFavoriteDrivers(data){
+    document.querySelector('#favoriteDriversTableBody').innerHTML = '';
+    data.forEach(d => {
+
+        //Create row element
+        const driverElement = document.createElement('tr');
+        
+        //Add each column element
+        const favoriteDriverName = document.createElement('td');
+        favoriteDriverName.className = 'border border-black px-2 py-1';
+        favoriteDriverName.textContent = d;
+        driverElement.appendChild(favoriteDriverName);
+
+        // Append the row to the table body
+        document.querySelector('#favoriteDriversTableBody').appendChild(driverElement);
+    })
+       
+}
+
+function favoriteButtonAction(){
+    document.querySelector('#favoriteButton').addEventListener('click', e => {
+        //removing and adding in case already on home page
+        populateFavoriteDrivers(JSON.parse(localStorage.getItem('favoriteDrivers')));
+        populateFavoriteConstructors(JSON.parse(localStorage.getItem('favoriteConstructors')))
+        populateFavoriteCircuits(JSON.parse(localStorage.getItem('favoriteCircuits')))
+
+        document.querySelector('#favorites').classList.toggle('hidden');  
+    })
+
+    document.querySelector('#emptyFavoritesButton').addEventListener('click', e => {
+        localStorage.setItem('favoriteDrivers', JSON.stringify([]));
+        localStorage.setItem('favoriteConstructors', JSON.stringify([]));
+        localStorage.setItem('favoriteCircuits', JSON.stringify([]));
+
+        populateFavoriteDrivers(JSON.parse(localStorage.getItem('favoriteDrivers')))
+        populateFavoriteConstructors(JSON.parse(localStorage.getItem('favoriteConstructors')))
+        populateFavoriteCircuits(JSON.parse(localStorage.getItem('favoriteCircuits')))
 
     })
+}
+
+function loadFavoriteButtons(){
+    document.querySelector('#favoriteDriversButtons').addEventListener('click', e => {
+        let driverName = document.querySelector('#drivers #driverName').textContent
+        addFavoriteDriver(driverName)
+        console.log(JSON.parse(localStorage.getItem('favoriteDrivers')))
+    })
+
+    document.querySelector('#addConstructorFavorite').addEventListener('click', e => {
+        let constructorName = document.querySelector('#constructor #constructorName').textContent
+        addFavoriteConstructor(constructorName)
+        console.log(JSON.parse(localStorage.getItem('favoriteConstructors')))
+    })
+
+    document.querySelector('#favoriteCircuitsButtons').addEventListener('click', e => {
+        let circuitName = document.querySelector('#circuit #circuitName').textContent
+        addFavoriteCircuit(circuitName)
+        console.log(JSON.parse(localStorage.getItem('favoriteCircuits')))
+    })
+
+    document.querySelector('#favorite-x-close').addEventListener('click', e => {
+        document.querySelector("#favorites").classList.add('hidden');
+    })
+}
 
 function driverSelect(){
     //Our buttons are loaded in dynamically, this approach uses event delegation
@@ -40,14 +231,9 @@ function driverSelect(){
     document.querySelector('#driver-x-close').addEventListener('click', e => {
         document.querySelector("#drivers").classList.add('hidden');
     })
-    document.querySelector('#driver-close').addEventListener('click', e => {
-        document.querySelector("#drivers").classList.add('hidden');
-    })
 }
 
 function populateDriverRaceResults(data){
-    console.log(data)
-    console.log((JSON.parse(localStorage.getItem('resultsForSeason'))))
     document.querySelector('#driverTableBody').innerHTML = '';
     data.forEach(d => {
 
@@ -76,11 +262,8 @@ function populateDriverRaceResults(data){
         const driverPoints = document.createElement('td');
 
         const resultID = d.resultId
-        //console.log(resultID)
 
         const resultsData = (JSON.parse(localStorage.getItem('resultsForSeason')))
-        //console.log(resultsData)
-
         
         for(let i =0; i<resultsData.length; i++)
             if (resultsData[i].id == resultID) {
@@ -88,29 +271,6 @@ function populateDriverRaceResults(data){
                 driverElement.appendChild(driverPoints);
             }
 
-        /*
-        const resultID = d.resultId;
-        //console.log(resultID)
-        //console.log(d.resultId)
-        const resultsData = (JSON.parse(localStorage.getItem('resultsData')))
-        //console.log(resultData)
-
-        //if(resultID == resultData.id && resultData.driver.ref == d.driverRef){
-
-
-        //let racePoints = (JSON.parse(localStorage.getItem('resultsData')).find(r=> r.id == d.resultId))
-        //console.log(racePoints)
-        //const race = raceData.find(r => r.id == raceID);
-        //console.log(resultID)
-        for(let i =0; i<resultsData.length; i++){
-            
-            if (resultsData[i].id == resultID) {
-                console.log(`${resultsData[i].id} ${resultID}`)
-                driverPoints.textContent = resultsData[i].points
-                //console.log(resultsData[i].points)
-            }
-        }
-*/
         //Add to the table body 
         document.querySelector('#driverTableBody').appendChild(driverElement);
 
@@ -143,10 +303,33 @@ function populateDriverDetails(data){
 
 
 
-function addFavorite(driver, constructor, circuit){
+function addFavoriteDriver(driver){
     const favoriteDrivers = JSON.parse(localStorage.getItem('favoriteDrivers')) || []; //Incase if there isn't any favorite drivers return an empty array
+
+    if(!favoriteDrivers.includes(driver)){
+        favoriteDrivers.push(driver);
+    }
+    localStorage.setItem('favoriteDrivers', JSON.stringify(favoriteDrivers));
+
+}
+
+function addFavoriteConstructor(constructor){
     const favoriteConstructors = JSON.parse(localStorage.getItem('favoriteConstructors')) || [];
+
+    if(!favoriteConstructors.includes(constructor)){
+        favoriteConstructors.push(constructor);
+    }
+    localStorage.setItem('favoriteConstructors', JSON.stringify(favoriteConstructors));
+} 
+
+function addFavoriteCircuit(circuit){
     const favoriteCircuits = JSON.parse(localStorage.getItem('favoriteCircuits')) || [];
+
+    if(!favoriteCircuits.includes(circuit)){
+        favoriteCircuits.push(circuit);
+    }
+    localStorage.setItem('favoriteCircuits', JSON.stringify(favoriteCircuits));
+
 
 }
 
@@ -197,8 +380,6 @@ function populateConstructorRaceResults(data){
 
 function populateConstructorDetails(data){
 
-
-  
     document.querySelector('#constructorName').textContent = `${data.name}`;
     document.querySelector('#constructorNationality').textContent = `${data.nationality}`;
     document.querySelector('#constructorURL').textContent = `${data.url}`;
@@ -216,9 +397,6 @@ function circuitDetailHandler(circuitID){
     document.querySelector('#circuit-x-close').addEventListener('click', e => {
         document.querySelector("#circuit").classList.add('hidden');
     })
-    document.querySelector('#circuit-close').addEventListener('click', e => {
-        document.querySelector("#circuit").classList.add('hidden');
-    })
 }
 
 function raceSelect(){
@@ -227,13 +405,10 @@ function raceSelect(){
         if (e.target && e.target.id === 'selectedRaceResultsButton') {
             
             const raceID = e.target.dataset.id;
+            localStorage.setItem('currentSelectedRaceID', raceID);
             
             singleRaceResult(raceID);
-
-
-            qualifyingResultsForRaceID(raceID);
-
-            
+            populateQualifying(qualifyingResultsForRaceID(raceID))
             populateRaceDetails(raceID)
         }
     });
@@ -254,13 +429,18 @@ function constructorSelect(){
     document.querySelector('#constructor-x-close').addEventListener('click', e => {
         document.querySelector("#constructor").classList.add('hidden');
     })
-    document.querySelector('#constructor-close').addEventListener('click', e => {
-        document.querySelector("#constructor").classList.add('hidden');
-    })
 }
 
 function homeButtonAction(){
     document.querySelector('#homeButton').addEventListener('click', e => {
+        //removing and adding in case already on home page
+        document.querySelector('#home').classList.remove('hidden');
+        document.querySelector('#browse').classList.add('hidden');
+        document.querySelector('#races').classList.add('hidden');
+        document.querySelector('#race-results').classList.add('hidden');
+    })
+
+    document.querySelector('#f1LogoButton').addEventListener('click', e => {
         //removing and adding in case already on home page
         document.querySelector('#home').classList.remove('hidden');
         document.querySelector('#browse').classList.add('hidden');
@@ -687,7 +867,6 @@ const DOMAIN = "https://www.randyconnolly.com/funwebdev/3rd/api/f1/"
  function driverRaceResults(driverRef, season){
     const URL = DOMAIN + `driverResults.php?driver=${driverRef}&season=${season}`
 
-    console.log(URL)
     fetch(URL)
 	.then(response=>response.json()) 
 	// function to be called when promise is resolved
@@ -809,14 +988,15 @@ const DOMAIN = "https://www.randyconnolly.com/funwebdev/3rd/api/f1/"
 //  Qualifying
 //All Qualifying results specified by raceID
  function qualifyingResultsForRaceID(raceID){
-     
+    console.log(`QualifyingResultsForRaceID ${raceID}`)
     let localQualifyingResultsForSeason = JSON.parse(localStorage.getItem('qualifyingResultsForSeason'));
 
+    let foundRaceResult = localQualifyingResultsForSeason.filter(r => r.race.id == raceID);
+    
+    localStorage.setItem('qualifyingResultsForRace', JSON.stringify(foundRaceResult))
+    return foundRaceResult
 
-    const race = localQualifyingResultsForSeason.filter(r => r.race.id == raceID);
-
-
-    populateQualifying(race);
+    
 }
 
 //All qualifying for all races specified by season
