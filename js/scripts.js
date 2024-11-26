@@ -209,10 +209,16 @@ function populateFavoriteDrivers(data){
  */
 function favoriteButtonAction(){
     document.querySelector('#favoriteButton').addEventListener('click', e => {
-        //removing and adding in case already on home page
-        populateFavoriteDrivers(JSON.parse(localStorage.getItem('favoriteDrivers')));
-        populateFavoriteConstructors(JSON.parse(localStorage.getItem('favoriteConstructors')))
-        populateFavoriteCircuits(JSON.parse(localStorage.getItem('favoriteCircuits')))
+        
+
+
+        const favoriteDrivers = JSON.parse(localStorage.getItem('favoriteDrivers')) || [];
+        const favoriteConstructors = JSON.parse(localStorage.getItem('favoriteConstructors')) || [];
+        const favoriteCircuits = JSON.parse(localStorage.getItem('favoriteCircuits')) || [];
+
+        populateFavoriteDrivers(favoriteDrivers);
+        populateFavoriteConstructors(favoriteConstructors);
+        populateFavoriteCircuits(favoriteCircuits);
 
         document.querySelector('#favorites').classList.toggle('hidden');  
     })
