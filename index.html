@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="styles.css">
-    <script type="module" src="../js/data.js"></script>
-    <script type="module" src="../js/scripts.js"></script>
+    <link rel="stylesheet" href="html/styles.css">
+    <script type="module" src="js/data.js"></script>
+    <script type="module" src="js/scripts.js"></script>
 </head>
 
 <body class="bg-black">
     <header id="homeNavbar" class="bg-custom-gray-primary shadow-lg rounded-t-none rounded-lg w-full flex items-center justify-between">
         <button id="f1LogoButton" class="ml-6">
-            <img id="f1Logo" class="size-20" src="../src/images/f1logo-cropped.svg" alt="F1 Logo">
+            <img id="f1Logo" class="size-20" src="src/images/f1logo-cropped.svg" alt="F1 Logo">
         </button>
         <h1 class="text-center pl-44 text-3xl flex-grow text-white">
             F1 Dashboard Project
@@ -55,7 +55,7 @@
             
         </div>
           
-        <img id="f1CarBackground" src="../src/images/f1Car.jpg" class="w-full h-full p-0 m-0">
+        <img id="f1CarBackground" src="src/images/f1Car.jpg" class="w-full h-full p-0 m-0">
         
     </article>
     
@@ -164,19 +164,19 @@
                                     <!--Just a template, haven't found images-->
                                     <h4 class="font-bold text-center text-xl p-2">Max Verstappen</h4>
                                     <div class="flex justify-center">
-                                        <img src="../src/images/1st-place-medal.svg" class="size-48"/>
+                                        <img src="src/images/1st-place-medal.svg" class="size-48"/>
                                     </div>
                                 </div>
                                 <div id="second">
                                     <h4 class="font-bold text-center text-xl p-2">Charles Leblanc</h4>
                                     <div class="flex justify-center">
-                                        <img src="../src/images/2nd-place-medal.svg" class="size-48"/>
+                                        <img src="src/images/2nd-place-medal.svg" class="size-48"/>
                                     </div>
                                 </div>
                                 <div id="third">
                                     <h4 class="font-bold text-center text-xl p-2">Lewis Hamilton</h4>
                                     <div class="flex justify-center">
-                                        <img src="../src/images/3rd-place-medal.svg" class="size-48"/>
+                                        <img src="src/images/3rd-place-medal.svg" class="size-48"/>
                                     </div>
                                 </div>
                             </div>
@@ -218,13 +218,13 @@
 
             <header class="flex justify-between px-8 items-center">
                 <h1 class="w-full text-center font-bold text-3xl">Circuit Details</h1>
-                <button id="circuit-x-close" class="size-12"><img src="../src/images/close_icon.svg"></button>
+                <button id="circuit-x-close" class="size-12"><img src="src/images/close_icon.svg"></button>
             </header>
 
             <section class="flex justify-center items-center">
 
                 <div class="w-1/2 p-4 flex h-[500px]">
-                    <img src="../src/images/sample_for_circuit.png" />
+                    <img src="src/images/sample_for_circuit.png" />
                 </div>
 
                 <div id="circuitDetails" class="h-[500px] w-1/2">
@@ -264,7 +264,7 @@
         <div id="modal" class="w-[70%] h-[70%] bg-blue-500 p-12 rounded-lg shadow-lg">
             <header class="flex justify-between px-8 items-center">
                 <h1 class="w-full text-center font-bold text-3xl">Driver Details</h1>
-                <button id="driver-x-close" class="size-12"><img src="../src/images/close_icon.svg"></button>
+                <button id="driver-x-close" class="size-12"><img src="src/images/close_icon.svg"></button>
             </header>
             <section class="flex justify-center items-center">
                 <div class="justify-center p-4 space-y-4">
@@ -316,7 +316,7 @@
         <div id="modal" class="w-[70%] h-[70%] bg-blue-500 p-12 rounded-lg shadow-lg">
             <header class="flex justify-between px-8 items-center">
                 <h1 class="w-full text-center font-bold text-3xl">Constructor Details</h1>
-                <button id="constructor-x-close" class="size-12"><img src="../src/images/close_icon.svg"></button>
+                <button id="constructor-x-close" class="size-12"><img src="src/images/close_icon.svg"></button>
             </header>
             <section class="flex justify-center items-center">
                 <div class="justify-center p-4 space-y-4">
@@ -363,8 +363,13 @@
     <dialog id="favorites" class="fixed hidden left-0 top-0 bg-black bg-opacity-50 h-full w-full flex justify-center items-center">
         <div id="modal" class="w-[70%] h-[70%] bg-blue-500 p-12 rounded-lg shadow-lg">
             <header class="flex justify-between px-8 items-center">
+<<<<<<< HEAD:html/index.html
                 <h1 class="w-full text-center font-bold text-3xl pl-6">Favorites</h1>
                 <button id="favorite-x-close" class="size-12"><img src="../src/images/close_icon.svg"></button>
+=======
+                <h1 class="w-full text-center font-bold text-3xl">Favorites</h1>
+                <button id="favorite-x-close" class="size-12"><img src="src/images/close_icon.svg"></button>
+>>>>>>> bf5cb415e74cd8dc9fd8dbc327b5a5a302c60d78:index.html
             </header>
             <div class="flex justify-center py-4">
                 <button id="emptyFavoritesButton" class="bg-transparent hover:bg-blue-500 text-black font-semibold hover:text-white py-2 px-4 border border-black hover:border-transparent rounded">Empty Favorites</button>
